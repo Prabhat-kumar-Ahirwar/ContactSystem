@@ -28,4 +28,9 @@ public class ContactController {
         List<Contacts> contacts = contactService.getAll();
         return new ResponseEntity<>(contacts , HttpStatus.CREATED);
     }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteByid(@PathVariable long id){
+        contactService.remove(id);
+        return ResponseEntity.noContent().build();
+    }
 }

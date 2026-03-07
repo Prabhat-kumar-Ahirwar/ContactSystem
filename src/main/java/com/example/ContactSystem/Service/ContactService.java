@@ -20,4 +20,11 @@ public class ContactService {
     public List<Contacts> getAll() {
         return contactRepo.findAll();
     }
+
+
+    public void remove(long id) {
+        Contacts contacts = contactRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contact Not Found"));
+        contactRepo.deleteById(id);
+    }
 }
