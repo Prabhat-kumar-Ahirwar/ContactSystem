@@ -33,4 +33,16 @@ public class ContactService {
                 .orElseThrow(()-> new RuntimeException("Contact Not Found"));
         return contactRepo.getById(id);
     }
+
+    public Contacts updateContact(long id, Contacts contacts) {
+        Contacts contact = contactRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contact Not Found"));
+        if (contacts.getName() != null)
+            contact.setName(contacts.getName());
+        if (contacts.getNumber() != 0)
+            contact.setNumber(contacts.getNumber());
+        if (contacts.getRelation() != null)
+            contact.setRelation(contacts.getRelation());
+        return contactRepo.save(contact);
+    }
 }
