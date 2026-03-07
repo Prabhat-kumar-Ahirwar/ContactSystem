@@ -5,6 +5,8 @@ import com.example.ContactSystem.Repository.ContactRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 
@@ -15,4 +17,7 @@ public class ContactService {
         return  contactRepo.save(contacts);
     }
 
+    public List<Contacts> getAll() {
+        return contactRepo.findAll();
+    }
 }
