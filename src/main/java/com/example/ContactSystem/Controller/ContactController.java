@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.util.List;
 
 @RestController
@@ -32,5 +33,10 @@ public class ContactController {
     public ResponseEntity<Void> deleteByid(@PathVariable long id){
         contactService.remove(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Contacts> getContactByid(@PathVariable long id){
+        Contacts contacts = contactService.getById(id);
+        return new ResponseEntity<>(contacts , HttpStatus.OK);
     }
 }

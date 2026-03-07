@@ -27,4 +27,10 @@ public class ContactService {
                 .orElseThrow(() -> new RuntimeException("Contact Not Found"));
         contactRepo.deleteById(id);
     }
+
+    public Contacts getById(long id) {
+        Contacts contacts = contactRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Contact Not Found"));
+        return contactRepo.getById(id);
+    }
 }
