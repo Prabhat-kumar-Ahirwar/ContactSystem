@@ -45,4 +45,8 @@ public class ContactService {
             contact.setRelation(contacts.getRelation());
         return contactRepo.save(contact);
     }
+
+    public List<Contacts> getByRelation(String relation) {
+        return contactRepo.findByRelation(relation);
+    }
 }

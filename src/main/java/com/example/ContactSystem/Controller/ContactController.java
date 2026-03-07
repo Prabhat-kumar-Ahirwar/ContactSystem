@@ -45,4 +45,9 @@ public class ContactController {
         Contacts updatecontact = contactService.updateContact(id,contacts);
         return ResponseEntity.ok(updatecontact);
     }
+    @GetMapping("/relation/{relation}")
+    public ResponseEntity<List<Contacts>> getContactByRelation(@PathVariable String relation) {
+        List<Contacts> contacts = contactService.getByRelation(relation);
+        return ResponseEntity.ok(contacts);
+    }
 }
