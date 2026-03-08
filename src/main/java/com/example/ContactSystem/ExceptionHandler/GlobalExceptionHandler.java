@@ -11,5 +11,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleContactNotFound(ContactNotFoundException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(DuplicateContactException.class)
+    public ResponseEntity<String> handleDuplicate(DuplicateContactException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
 }

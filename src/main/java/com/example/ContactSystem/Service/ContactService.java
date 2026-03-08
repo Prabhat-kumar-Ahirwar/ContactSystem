@@ -2,6 +2,7 @@ package com.example.ContactSystem.Service;
 
 import com.example.ContactSystem.Entity.Contacts;
 import com.example.ContactSystem.ExceptionHandler.ContactNotFoundException;
+import com.example.ContactSystem.ExceptionHandler.DuplicateContactException;
 import com.example.ContactSystem.Repository.ContactRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class ContactService {
     private final ContactRepo contactRepo;
 
     public Contacts addContact(Contacts contacts) {
+        if(contactRepo.existsByNumber(contacts.getNumber())){
+            throw new DuplicateContactException("Phone number already exists");
+        }
+
         return contactRepo.save(contacts);
     }
 
@@ -30,14 +35,14 @@ public class ContactService {
 
     public void remove(long id) {
         Contacts contact = contactRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contact Not Found"));
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found with id " + id));
         contactRepo.delete(contact);
     }
 
     public Contacts updateContact(long id, Contacts contacts) {
 
         Contacts contact = contactRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contact Not Found"));
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found with id " + id));
 
         if (contacts.getName() != null)
             contact.setName(contacts.getName());
