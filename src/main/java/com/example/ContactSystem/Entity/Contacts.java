@@ -1,9 +1,11 @@
 package com.example.ContactSystem.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.processing.Pattern;
 
 @Entity
 @Getter
@@ -16,11 +18,14 @@ public class Contacts {
     private long id;
 
     @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
-    private long number;
+    @NotBlank(message = "Phone number is required")
+    private String number;
 
-    @Column(nullable = false, length = 50)
+    @NotBlank(message = "Name is required")
+    @Size(max = 50)
     private String name;
 
-    @Column(length = 50)
+    @NotBlank(message = "Relation is required")
+    @Size(max = 50)
     private String relation;
 }
