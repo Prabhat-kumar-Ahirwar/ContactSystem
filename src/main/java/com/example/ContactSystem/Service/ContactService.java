@@ -5,6 +5,7 @@ import com.example.ContactSystem.ExceptionHandler.ContactNotFoundException;
 import com.example.ContactSystem.ExceptionHandler.DuplicateContactException;
 import com.example.ContactSystem.Repository.ContactRepo;
 import lombok.AllArgsConstructor;
+import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +59,9 @@ public class ContactService {
 
     public List<Contacts> getByRelation(String relation) {
         return contactRepo.findByRelation(relation);
+    }
+
+    public List<Contacts> getByName(String name) {
+        return contactRepo.findByNameContaining(name);
     }
 }

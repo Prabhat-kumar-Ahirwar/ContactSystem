@@ -4,6 +4,7 @@ import com.example.ContactSystem.Entity.Contacts;
 import com.example.ContactSystem.Service.ContactService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,11 @@ public class ContactController {
     public ResponseEntity<List<Contacts>> getContactByRelation(@PathVariable String relation) {
         List<Contacts> contacts = contactService.getByRelation(relation);
         return ResponseEntity.ok(contacts);
+    }
+
+    @GetMapping("search/{name}")
+    public ResponseEntity<List<Contacts>> getByName(@PathVariable String name){
+        List<Contacts> contacts = contactService.getByName(name);
+        return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
 }
