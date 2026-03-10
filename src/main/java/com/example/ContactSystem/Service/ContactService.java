@@ -65,8 +65,8 @@ public class ContactService {
         return contactRepo.findByRelation(relation);
     }
 
-    public List<Contacts> getByName(String name) {
-        return contactRepo.findByNameContaining(name);
+    public Page<Contacts> getByName(String name,Pageable pageable) {
+        return contactRepo.findByNameContaining(name,pageable);
     }
 
     public List<Contacts> getByNumber(int number) {

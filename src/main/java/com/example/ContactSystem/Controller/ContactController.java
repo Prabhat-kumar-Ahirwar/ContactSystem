@@ -5,6 +5,7 @@ import com.example.ContactSystem.Service.ContactService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,9 +57,9 @@ public class ContactController {
     }
 
     @GetMapping("search/{name}")
-    public ResponseEntity<List<Contacts>> getByName(@PathVariable String name){
-        List<Contacts> contacts = contactService.getByName(name);
-        return new ResponseEntity<>(contacts, HttpStatus.OK);
+    public ResponseEntity<Page<Contacts>> getByName(@PathVariable String name, Pageable pageable){
+        Page<Contacts> contacts = contactService.getByName(name,pageable);
+        return new ResponseEntity<>(contacts,HttpStatus.OK);
     }
 
     @GetMapping("search/phone/{number}")
