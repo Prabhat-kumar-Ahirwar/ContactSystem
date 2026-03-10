@@ -64,4 +64,8 @@ public class ContactService {
     public List<Contacts> getByName(String name) {
         return contactRepo.findByNameContaining(name);
     }
+
+    public List<Contacts> getByNumber(int number) {
+        return contactRepo.findByNumberContaining(number);
+    }
 }

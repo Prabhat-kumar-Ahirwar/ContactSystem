@@ -15,4 +15,6 @@ public interface ContactRepo extends JpaRepository<Contacts, Long > {
         boolean existsByNumber(@Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits") @NotBlank(message = "Phone number is required") String number);
 
         List<Contacts> findByNameContaining(String name);
+
+        List<Contacts> findByNumberContaining(int number);
 }

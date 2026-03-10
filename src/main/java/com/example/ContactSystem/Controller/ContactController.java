@@ -57,4 +57,10 @@ public class ContactController {
         List<Contacts> contacts = contactService.getByName(name);
         return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
+
+    @GetMapping("search/phone/{number}")
+    public ResponseEntity<List<Contacts>> getByNumber(@PathVariable int number){
+        List<Contacts> contacts = contactService.getByNumber(number);
+        return new ResponseEntity<>(contacts,HttpStatus.OK);
+    }
 }
