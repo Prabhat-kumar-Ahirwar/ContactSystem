@@ -6,6 +6,10 @@ import com.example.ContactSystem.ExceptionHandler.DuplicateContactException;
 import com.example.ContactSystem.Repository.ContactRepo;
 import lombok.AllArgsConstructor;
 import org.aspectj.apache.bcel.generic.RET;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,10 +28,10 @@ public class ContactService {
         return contactRepo.save(contacts);
     }
 
-    public List<Contacts> getAll() {
-        return contactRepo.findAll();
+    public Page<Contacts> getAll(int page, int size){
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        return contactRepo.findAll(pageable);
     }
-
     public Contacts getById(long id) {
         return contactRepo.findById(id)
                 .orElseThrow(() -> new ContactNotFoundException("Contact not found with id " + id));

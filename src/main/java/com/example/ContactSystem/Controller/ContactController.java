@@ -4,6 +4,7 @@ import com.example.ContactSystem.Entity.Contacts;
 import com.example.ContactSystem.Service.ContactService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,15 @@ public class ContactController {
     @PostMapping("/add")
     public ResponseEntity<Contacts> addContact(@Valid @RequestBody Contacts contacts){
         Contacts contact = contactService.addContact(contacts);
-        return new ResponseEntity<>(contact , HttpStatus.CREATED);
+        return new ResponseEntity<>(contact , HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Contacts>> getAllContacts(){
-        List<Contacts> contacts = contactService.getAll();
-        return new ResponseEntity<>(contacts , HttpStatus.CREATED);
+    public ResponseEntity<Page<Contacts>> getAllContacts(
+            @RequestParam int page,
+            @RequestParam int size){
+        Page<Contacts> contacts = contactService.getAll(page, size);
+        return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteByid(@PathVariable long id){
