@@ -4,8 +4,8 @@ import com.example.ContactSystem.Entity.Contacts;
 import com.example.ContactSystem.ExceptionHandler.ContactNotFoundException;
 import com.example.ContactSystem.ExceptionHandler.DuplicateContactException;
 import com.example.ContactSystem.Repository.ContactRepo;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
-import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -69,7 +69,12 @@ public class ContactService {
         return contactRepo.findByNameContaining(name,pageable);
     }
 
-    public List<Contacts> getByNumber(int number) {
+    public List<Contacts> getByNumber(String number) {
         return contactRepo.findByNumberContaining(number);
+    }
+
+
+    public List<Contacts> getByEmail(String email) {
+        return contactRepo.findByEmail(email);
     }
 }
