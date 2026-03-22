@@ -94,4 +94,11 @@ public class ContactController {
         List<Contacts> contacts = contactService.getByEmail(email);
         return ResponseEntity.ok(contacts);
     }
+    @GetMapping("/sorted")
+    public ResponseEntity<List<Contacts>> getSortedContacts(
+            @RequestParam(defaultValue = "name") String field){
+
+        List<Contacts> contacts = contactService.getSorted(field);
+        return ResponseEntity.ok(contacts);
+    }
 }

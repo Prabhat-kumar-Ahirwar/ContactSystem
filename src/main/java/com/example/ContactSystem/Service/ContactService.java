@@ -77,4 +77,8 @@ public class ContactService {
     public List<Contacts> getByEmail(String email) {
         return contactRepo.findByEmail(email);
     }
+
+    public List<Contacts> getSorted(String field) {
+        return contactRepo.findAll(Sort.by(Sort.Direction.ASC, field));
+    }
 }
