@@ -101,4 +101,10 @@ public class ContactController {
         List<Contacts> contacts = contactService.getSorted(field);
         return ResponseEntity.ok(contacts);
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countContacts(){
+        long count = contactService.countContacts();
+        return ResponseEntity.ok(count);
+    }
 }

@@ -81,4 +81,8 @@ public class ContactService {
     public List<Contacts> getSorted(String field) {
         return contactRepo.findAll(Sort.by(Sort.Direction.ASC, field));
     }
+
+    public long countContacts() {
+        return contactRepo.count();
+    }
 }
